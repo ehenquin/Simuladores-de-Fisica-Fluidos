@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simuladores de Física - Dinámica de Fluidos 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                enableMenu: false
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Simuladores de Física <span>- Dinámica de Fluidos 2026</span></h1>
+            <h2>Módulo Educativo y de Cálculo</h2>
+        </div>
+        <nav>
+            <button class="nav-btn active" data-tab="tab-teoria">1. Teoría Esencial</button>
+            <button class="nav-btn" data-tab="tab-tanque">2. Tanque y Chorro</button>
+            <button class="nav-btn" data-tab="tab-pitot">3. Tubo de Pitot</button>
+            <button class="nav-btn" data-tab="tab-bernoulli">4. Continuidad y Bernoulli</button>
+            <button class="nav-btn" data-tab="tab-venturi">5. Venturi</button>
+            <button class="nav-btn" data-tab="tab-bombas">6. Sistema de Bombeo</button>
+            <button id="btn-about" class="nav-btn about-btn">Acerca de</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PESTAÑA 1: TEORÍA ESENCIAL -->
+        <section id="tab-teoria" class="tab-content active">
+            <div class="card">
+                <h3>Principios de Dinámica de Fluidos</h3>
+                <p class="subtitle">Resumen de fórmulas y conceptos fundamentales para el análisis de sistemas técnicos.
+                </p>
+                <div style="overflow-x: auto;">
+                    <table class="theory-table">
+                        <thead>
+                            <tr>
+                                <th>Tema</th>
+                                <th>Fórmula</th>
+                                <th>Significado</th>
+                                <th>Ejemplo Técnico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Caudal Volumétrico</td>
+                                <td class="formula-display">$$Q = A \cdot v$$</td>
+                                <td>Volumen que pasa por unidad de tiempo.</td>
+                                <td>Caudal de agua en una tubería de proceso.</td>
+                            </tr>
+                            <tr>
+                                <td>Caudal Másico</td>
+                                <td class="formula-display">$$\dot{m} = \rho \cdot Q$$</td>
+                                <td>Masa que pasa por unidad de tiempo.</td>
+                                <td>Balance de materia en una evaporadora.</td>
+                            </tr>
+                            <tr>
+                                <td>Continuidad</td>
+                                <td class="formula-display">$$A_1 v_1 = A_2 v_2$$</td>
+                                <td>Si el tubo se estrecha, la velocidad aumenta.</td>
+                                <td>Aceleración del fluido en una boquilla.</td>
+                            </tr>
+                            <tr>
+                                <td>Bernoulli</td>
+                                <td class="formula-display">$$P + \rho gh + \frac{1}{2}\rho v^2 = \text{cte}$$</td>
+                                <td>Relación entre presión, altura y velocidad.</td>
+                                <td>Pérdida de presión al ganar velocidad.</td>
+                            </tr>
+                            <tr>
+                                <td>Torricelli</td>
+                                <td class="formula-display">$$v = \sqrt{2gh}$$</td>
+                                <td>Velocidad de salida por un orificio.</td>
+                                <td>Vaciado de un silo o tanque de mezcla.</td>
+                            </tr>
+                            <tr>
+                                <td>Pitot</td>
+                                <td class="formula-display">$$v = \sqrt{\frac{2\Delta P}{\rho}}$$</td>
+                                <td>Mide velocidad a partir de presión dinámica.</td>
+                                <td>Velocímetro de un avión o sonda en ducto.</td>
+                            </tr>
+                            <tr>
+                                <td>Venturi</td>
+                                <td class="formula-display">$$Q = A_2 \sqrt{\frac{2\Delta P}{\rho(1 - (A_2/A_1)^2)}}$$
+                                </td>
+                                <td>Calcula caudal por diferencia de presión.</td>
+                                <td>Medidor de caudal en línea de producción.</td>
+                            </tr>
+                            <tr>
+                                <td>Potencia Hidráulica</td>
+                                <td class="formula-display">$$P_h = \rho g Q H$$</td>
+                                <td>Potencia entregada al fluido.</td>
+                                <td>Energía necesaria para elevar un líquido.</td>
+                            </tr>
+                            <tr>
+                                <td>Potencia Motor</td>
+                                <td class="formula-display">$$P_m = \frac{P_h}{\eta}$$</td>
+                                <td>Potencia real considerando eficiencia.</td>
+                                <td>Selección de motor para una bomba.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="development-box" style="margin-top: 2rem;">
+                    <h4>⚠️ Advertencia Didáctica</h4>
+                    <p>En esta app se trabajan modelos ideales o simplificados. En instalaciones reales deben
+                        considerarse pérdidas localizadas, curvas reales de bombas, NPSH, viscosidad, régimen de flujo
+                        (Reynolds), accesorios, válvulas, filtros y criterios sanitarios específicos de la industria
+                        alimentaria o química.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: TANQUE Y CHORRO -->
+        <section id="tab-tanque" class="tab-content">
+            <div class="simulator-container">
+                <aside class="controls-panel card">
+                    <h3>Controles</h3>
+                    <div class="control-group">
+                        <label>Altura del Agua ($y_2$) [cm]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="tanque-y2" min="1" max="200" value="100">
+                            <span class="val-display" id="val-tanque-y2">100 cm</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Altura del Orificio ($y_1$) [cm]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="tanque-y1" min="0" max="150" value="20">
+                            <span class="val-display" id="val-tanque-y1">20 cm</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Diámetro del Orificio [cm]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="tanque-d" min="0.5" max="10" step="0.1" value="3.0">
+                            <span class="val-display" id="val-tanque-d">3.0 cm</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Distancia Objetivo ($x$) [m]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="tanque-target-x" min="0.10" max="3.00" step="0.05" value="1.20">
+                            <span class="val-display" id="val-tanque-target-x">1,20 m</span>
+                        </div>
+                        <button class="btn-action" id="btn-tanque-solve">Resolver para $x$ objetivo</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-secondary" id="btn-tanque-reset">Restablecer</button>
+                        <button class="btn-secondary" id="btn-tanque-copy">Copiar Resultados</button>
+                    </div>
+                    <label class="check-container" style="margin-top: 1rem;">
+                        <input type="checkbox" id="tanque-show-dev"> Mostrar desarrollo paso a paso
+                    </label>
+                </aside>
+
+                <div class="visual-panel">
+                    <div class="canvas-container" style="height: 400px;">
+                        <canvas id="canvas-tanque"></canvas>
+                        <div class="canvas-overlay">
+                            <div class="overlay-tag">Modelo: Teorema de Torricelli</div>
+                        </div>
+                    </div>
+
+                    <div class="results-card">
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <span class="result-label">Velocidad Salida</span>
+                                <span class="result-value" id="res-tanque-v">0.00</span><span
+                                    class="result-unit">m/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Alcance (x)</span>
+                                <span class="result-value" id="res-tanque-x">0.00</span><span
+                                    class="result-unit">m</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Caudal</span>
+                                <span class="result-value" id="res-tanque-q">0.00</span><span
+                                    class="result-unit">L/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Caudal Hora</span>
+                                <span class="result-value" id="res-tanque-qh">0.00</span><span
+                                    class="result-unit">L/h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tanque-equations" class="equations-panel">
+                        <div class="equations-title">
+                            <span>📐</span> Ecuaciones del modelo
+                        </div>
+                        <div id="tanque-equations-content" class="equation-grid">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: PITOT -->
+        <section id="tab-pitot" class="tab-content">
+            <div class="simulator-container">
+                <aside class="controls-panel card">
+                    <h3>Parámetros de Vuelo</h3>
+                    <div class="control-group">
+                        <label>Distancia de Vuelo [km]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="pitot-dist" min="100" max="20000" step="100" value="10100">
+                            <span class="val-display" id="val-pitot-dist">10100 km</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Densidad del Aire ($\rho$) [kg/m³]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="pitot-rho" min="0.4" max="1.3" step="0.001" value="0.850">
+                            <span class="val-display" id="val-pitot-rho">0.850</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Diferencia de Presión ($\Delta P$) [kPa]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="pitot-dp" min="1" max="100" step="0.5" value="27">
+                            <span class="val-display" id="val-pitot-dp">27 kPa</span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-secondary" id="btn-pitot-reset">Restablecer</button>
+                        <button class="btn-secondary" id="btn-pitot-copy">Copiar Resultados</button>
+                    </div>
+                </aside>
+
+                <div class="visual-panel">
+                    <div class="canvas-container" style="height: 350px;">
+                        <canvas id="canvas-pitot"></canvas>
+                        <div class="canvas-overlay">
+                            <button class="nav-btn" style="padding: 4px 10px; font-size: 0.75rem;"
+                                id="btn-pitot-theory">Ver explicación del principio de Pitot</button>
+                        </div>
+                    </div>
+
+                    <div id="pitot-theory-card" class="card" style="margin-top: 1rem; border-color: var(--accent);">
+                        <h4>¿Cómo funciona el Tubo de Pitot?</h4>
+                        <p>El tubo de Pitot permite calcular la velocidad de un flujo midiendo una diferencia de
+                            presión. La presión total se mide donde el aire se detiene en la boca del tubo. La presión
+                            estática representa la presión del aire sin frenarlo. La diferencia entre ambas es la
+                            presión dinámica, y de ella se obtiene la velocidad.</p>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;"><strong>Modelo
+                                simplificado:</strong> Se supone densidad constante, vuelo sin viento y velocidad
+                            constante.</p>
+                    </div>
+
+                    <div class="results-card">
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <span class="result-label">Velocidad</span>
+                                <span class="result-value" id="res-pitot-v-ms">0.0</span><span
+                                    class="result-unit">m/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Velocidad</span>
+                                <span class="result-value" id="res-pitot-v-kmh">0.0</span><span
+                                    class="result-unit">km/h</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Duración</span>
+                                <span class="result-value" id="res-pitot-t">0.0</span><span
+                                    class="result-unit">horas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pitot-equations" class="equations-panel">
+                        <div class="equations-title">
+                            <span>📐</span> Ecuaciones del modelo
+                        </div>
+                        <div id="pitot-equations-content" class="equation-grid">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 4: CONTINUIDAD Y BERNOULLI -->
+        <section id="tab-bernoulli" class="tab-content">
+            <div class="simulator-container">
+                <aside class="controls-panel card">
+                    <h3>Estrechamiento de Tubo</h3>
+                    <div class="control-group">
+                        <label>Área Sección A ($A_1$) [cm²]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="bern-a1" min="15" max="100" value="30">
+                            <span class="val-display" id="val-bern-a1">30 cm²</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Área Sección B ($A_2$) [cm²]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="bern-a2" min="1" max="25" value="10">
+                            <span class="val-display" id="val-bern-a2">10 cm²</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Presión en A ($P_1$) [kPa]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="bern-p1" min="150" max="300" value="200">
+                            <span class="val-display" id="val-bern-p1">200 kPa</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Presión en B ($P_2$) [kPa]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="bern-p2" min="100" max="145" value="130">
+                            <span class="val-display" id="val-bern-p2">130 kPa</span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-secondary" id="btn-bern-reset">Restablecer</button>
+                    </div>
+                </aside>
+
+                <div class="visual-panel">
+                    <div class="canvas-container" style="height: 350px;">
+                        <canvas id="canvas-bern"></canvas>
+                        <div class="canvas-overlay">
+                            <div class="overlay-tag">Efecto Venturi / Bernoulli</div>
+                        </div>
+                    </div>
+
+                    <div class="results-card">
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <span class="result-label">Velocidad en A</span>
+                                <span class="result-value" id="res-bern-v1">0.00</span><span
+                                    class="result-unit">m/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Velocidad en B</span>
+                                <span class="result-value" id="res-bern-v2">0.00</span><span
+                                    class="result-unit">m/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Relación $v_2/v_1$</span>
+                                <span class="result-value" id="res-bern-ratio">0.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bernoulli-equations" class="equations-panel">
+                        <div class="equations-title">
+                            <span>📐</span> Ecuaciones del modelo
+                        </div>
+                        <div id="bernoulli-equations-content" class="equation-grid">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 5: VENTURI -->
+        <section id="tab-venturi" class="tab-content">
+            <div class="simulator-container">
+                <aside class="controls-panel card">
+                    <h3>Medidor de Caudal</h3>
+                    <div class="control-group">
+                        <label>Diámetro Mayor ($D_1$) [cm]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="vent-d1" min="8" max="25" value="10">
+                            <span class="val-display" id="val-vent-d1">10 cm</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Diámetro Menor ($D_2$) [cm]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="vent-d2" min="2" max="7" value="6">
+                            <span class="val-display" id="val-vent-d2">6 cm</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Diferencia de Presión ($\Delta P$) [kPa]</label>
+                        <div class="input-with-value">
+                            <input type="range" id="vent-dp" min="1" max="50" value="15">
+                            <span class="val-display" id="val-vent-dp">15 kPa</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label>Coeficiente de Descarga ($C_d$)</label>
+                        <div class="input-with-value">
+                            <input type="range" id="vent-cd" min="0.80" max="1.00" step="0.01" value="1.00">
+                            <span class="val-display" id="val-vent-cd">1.00</span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-secondary" id="btn-vent-reset">Restablecer</button>
+                        <button class="btn-secondary" id="btn-vent-copy">Copiar Resultados</button>
+                    </div>
+                    <label class="check-container" style="margin-top: 1rem;">
+                        <input type="checkbox" id="vent-show-dev"> Mostrar desarrollo paso a paso
+                    </label>
+                </aside>
+
+                <div class="visual-panel">
+                    <div class="canvas-container" style="height: 350px;">
+                        <canvas id="canvas-vent"></canvas>
+                        <div class="canvas-overlay">
+                            <div class="overlay-tag">Medidor Venturi</div>
+                        </div>
+                    </div>
+
+                    <div class="results-card">
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <span class="result-label">Caudal Volumétrico</span>
+                                <span class="result-value" id="res-vent-q">0.00</span><span
+                                    class="result-unit">L/s</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Caudal L/min</span>
+                                <span class="result-value" id="res-vent-qmin">0.00</span><span
+                                    class="result-unit">L/min</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Velocidad Garganta</span>
+                                <span class="result-value" id="res-vent-v2">0.00</span><span
+                                    class="result-unit">m/s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="venturi-equations" class="equations-panel">
+                        <div class="equations-title">
+                            <span>📐</span> Ecuaciones del modelo
+                        </div>
+                        <div id="venturi-equations-content" class="equation-grid">
+                            <!-- Contenido dinámico -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 6: SISTEMA DE BOMBEO -->
+        <section id="tab-bombas" class="tab-content">
+            <div class="card">
+                <h3>Sistema de Bombeo entre Tanques</h3>
+                <p class="subtitle">Cálculo de caudal, altura manométrica, pérdidas por fricción y potencia requerida.
+                </p>
+
+                <div class="simulator-container">
+                    <aside class="controls-panel">
+                        <h3>Controles del Sistema</h3>
+                        <div class="control-group">
+                            <label>Volumen a transferir [L]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-vol" min="100" max="10000" step="100" value="1500">
+                                <span class="val-display" id="val-pump-vol">1500 L</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Densidad del Fluido [kg/m³]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-rho" min="800" max="1300" step="1" value="1000">
+                                <span class="val-display" id="val-pump-rho">1000 kg/m³</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Tiempo objetivo [h]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-time" min="0.25" max="8" step="0.25" value="2">
+                                <span class="val-display" id="val-pump-time">2 h</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Nivel Tanque A ($z_A$) [m]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-za" min="0" max="10" step="0.1" value="1.0">
+                                <span class="val-display" id="val-pump-za">1.0 m</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Nivel Tanque B ($z_B$) [m]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-zb" min="0" max="20" step="0.1" value="3.5">
+                                <span class="val-display" id="val-pump-zb">3.5 m</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Presión Tanque B [bar manométricos]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-pb" min="0" max="5" step="0.05" value="0.2">
+                                <span class="val-display" id="val-pump-pb">0.2 bar</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Longitud Cañería [m]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-len" min="1" max="200" step="1" value="15">
+                                <span class="val-display" id="val-pump-len">15 m</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Diámetro Interior [pulgadas]</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-diam" min="0.5" max="6" step="0.1" value="1.5">
+                                <span class="val-display" id="val-pump-diam">1.5 pulgadas</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Factor de Fricción ($f$)</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-f" min="0.005" max="0.080" step="0.001" value="0.022">
+                                <span class="val-display" id="val-pump-f">0.022</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Eficiencia Bomba ($\eta$)</label>
+                            <div class="input-with-value">
+                                <input type="range" id="pump-eta" min="0.1" max="0.9" step="0.05" value="0.65">
+                                <span class="val-display" id="val-pump-eta">65%</span>
+                            </div>
+                        </div>
+                        <div class="button-group" style="margin-top: 1.5rem;">
+                            <button class="btn-secondary" id="btn-pump-reset">Restablecer</button>
+                        </div>
+                    </aside>
+
+                    <div class="visual-panel">
+                        <div class="canvas-container" style="height: 400px;">
+                            <canvas id="canvas-pump"></canvas>
+                            <div class="canvas-overlay">
+                                <div class="overlay-tag">Esquema del Sistema</div>
+                            </div>
+                        </div>
+
+                        <div class="results-card">
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <span class="result-label">Caudal Calculado (Q)</span>
+                                    <span class="result-value" id="res-pump-q">0.00</span><span
+                                        class="result-unit">L/s</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Altura Manométrica (H)</span>
+                                    <span class="result-value" id="res-pump-h">0.00</span><span
+                                        class="result-unit">m</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Potencia Hidráulica</span>
+                                    <span class="result-value" id="res-pump-ph">0.0</span><span
+                                        class="result-unit">W</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Potencia Motor</span>
+                                    <span class="result-value" id="res-pump-pm-kw">0.00</span><span
+                                        class="result-unit">kW</span>
+                                </div>
+                                <div class="result-item">
+                                    <span class="result-label">Potencia Motor</span>
+                                    <span class="result-value" id="res-pump-pm-hp">0.00</span><span
+                                        class="result-unit">HP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="pump-equations" class="equations-panel">
+                            <div class="equations-title">
+                                <span>📐</span> Ecuaciones del modelo
+                            </div>
+                            <div id="pump-equations-content" class="equation-grid">
+                                <!-- Contenido dinámico -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Simuladores de Física - Dinámica de Fluidos 2026</p>
+        <p>Diseñado por <strong>Dr. Eduardo R. Henquín</strong></p>
+        <p><a href="https://ehenquin.github.io/LinkTreePro/" target="_blank">LinkTree</a> | Recursos Educativos para
+            Escuelas Técnicas</p>
+    </footer>
+
+    <!-- MODAL ACERCA DE -->
+    <div id="about-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content about-card">
+            <div class="about-header">
+                <h2>Acerca de este simulador</h2>
+            </div>
+
+            <div class="about-body">
+                <section class="about-section">
+                    <p>Este módulo forma parte de la serie <strong>Simuladores de Física 2026</strong>, desarrollada
+                        como recurso educativo interactivo para estudiantes de escuelas técnicas.</p>
+                    <p>El objetivo de esta aplicación es ayudar a comprender conceptos básicos de dinámica de fluidos
+                        mediante modelos visuales, controles manipulables y ecuaciones desarrolladas paso a paso.</p>
+                    <p>Los simuladores incluidos permiten explorar situaciones típicas de fluidos aplicados: caudal,
+                        continuidad, Bernoulli, salida de líquidos desde tanques, tubo de Pitot, medidor Venturi y
+                        sistemas de bombeo entre tanques.</p>
+                    <p>La herramienta está pensada para complementar el trabajo en clase, favorecer la discusión técnica
+                        y permitir que el estudiante relacione fórmulas, unidades, resultados numéricos y representación
+                        física del sistema.</p>
+                </section>
+
+                <section class="about-section warning-card">
+                    <h4>⚠️ Importante</h4>
+                    <p>Los modelos utilizados son simplificaciones didácticas. En instalaciones reales deben
+                        considerarse pérdidas localizadas, accesorios, régimen de flujo, viscosidad, curvas reales de
+                        bombas, NPSH, condiciones de operación y criterios de seguridad.</p>
+                </section>
+
+                <div class="about-grid">
+                    <section class="about-section">
+                        <h4>Autor</h4>
+                        <p>Diseñado y desarrollado por:<br><strong>Dr. Eduardo R. Henquín</strong></p>
+                        <p>Recursos educativos:<br><a href="https://ehenquin.github.io/LinkTreePro/" target="_blank"
+                                class="about-link">LinkTree Pro</a></p>
+                    </section>
+
+                    <div class="about-section">
+                        <h4>Enfoque didáctico</h4>
+                        <p>
+                            Este simulador fue diseñado a partir de situaciones típicas trabajadas en la formación
+                            técnica:
+                            cálculo de caudales, diferencias de presión, aplicación de Bernoulli, medición con Pitot y
+                            Venturi,
+                            y análisis básico de sistemas de bombeo.
+                        </p>
+                        <p>
+                            La intención es que el estudiante no solo obtenga un resultado numérico, sino que pueda
+                            relacionar
+                            el dibujo del sistema, las variables físicas, las unidades y las ecuaciones utilizadas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btn-about-close" class="btn-primary">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+</body>
+
+</html>
